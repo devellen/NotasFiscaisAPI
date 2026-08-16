@@ -1,5 +1,9 @@
 using System.Data;
+using AutoMapper;
+using CrudNotasFiscais.Config;
+using Domain.AutoMapper;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +14,13 @@ builder.Services.AddScoped<IDbConnection>(provider =>
     connection.Open();
     return connection;
 });
+
+builder.Services.DependencInjection(builder.Configuration);
+
+builder.Services.AddAutoMapper(
+    cfg => { },
+    typeof(Profiles).Assembly
+);
 // Add services to the container.
 
 builder.Services.AddControllers();

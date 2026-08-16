@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "aE1AbCE3qJnhJnplkRCSFLyba7mOVKm3FRmO8EWsMvo=",
+  "Source": "CrudNotasFiscais",
+  "BasePath": "_content/CrudNotasFiscais",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

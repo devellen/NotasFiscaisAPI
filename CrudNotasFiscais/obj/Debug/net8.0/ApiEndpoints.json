@@ -1,6 +1,42 @@
 [
   {
     "ContainingType": "CrudNotasFiscais.Controllers.NotaFiscalController",
+    "Method": "ObterTodos",
+    "RelativePath": "NotaFiscal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filtro",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "pagina",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "tamanhoPagina",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Domain.Genericos.ResultadoPaginado\u00601[[Domain.DTOs.DocFiscalDto, Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CrudNotasFiscais.Controllers.NotaFiscalController",
     "Method": "ExcluirDocumento",
     "RelativePath": "NotaFiscal/{id}",
     "HttpMethod": "DELETE",

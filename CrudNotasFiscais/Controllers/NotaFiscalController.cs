@@ -1,4 +1,6 @@
 ﻿using Application.Interfaces;
+using Domain.DTOs;
+using Domain.Genericos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrudNotasFiscais.Controllers
@@ -24,6 +26,13 @@ namespace CrudNotasFiscais.Controllers
             }
             catch (Exception ex) { return BadRequest(ex.Message); }
         }
+        [HttpGet]
+        public async Task<ActionResult<ResultadoPaginado<DocFiscalDto>>> ObterTodos([FromQuery] string? filtro, [FromQuery] int pagina = 1, [FromQuery] int tamanhoPagina = 50)
+        {
+            var documentos = await _service.ListarDocumentos(filtro, pagina, tamanhoPagina);
+            return Ok(documentos);
+        }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterDocumentoPorId(int id)

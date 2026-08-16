@@ -25,6 +25,36 @@ namespace Infrastructure.Repositories
             catch (Exception ex) { throw ex; }
         }
 
+        public async Task<(IEnumerable<DocFiscal>, int)> ListarDocumentos(string? filtro, int pagina, int tamanhoPagina)
+        {
+            int totalCount;
+            var sql = @"SELECT * FROM DocumentoFiscal ";
+
+            var condicao = @"
+                            WHERE 
+                            CnpjEmitente LIKE '%' + @FILTRO + '%'
+                            OR Uf LIKE '%' + @FILTRO + '%'
+                            OR RazaoSocialEmitente  LIKE '%' + @FILTRO + '%'
+                        ";
+
+
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                sql += condicao;
+                totalCount = await _connection.ExecuteScalarAsync<int>($"SELECT COUNT(*) FROM DocumentoFiscal {condicao}", new { FILTRO = filtro });
+            }
+            else
+            {
+                totalCount = await _connection.ExecuteScalarAsync<int>($"SELECT COUNT(*) FROM DocumentoFiscal");
+            }
+
+            sql += $" ORDER BY DataEmissao OFFSET {(pagina - 1) * tamanhoPagina} ROWS FETCH NEXT {tamanhoPagina} ROWS ONLY";
+
+            var resultado = await _connection.QueryAsync<DocFiscal>(sql, new { FILTRO = filtro });
+
+            return (resultado.ToList(), totalCount);
+        }
+
         public async Task<DocFiscal> ObterDocumentoPorId(int id)
         {
             try

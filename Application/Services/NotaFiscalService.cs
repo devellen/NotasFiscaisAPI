@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using AutoMapper;
 using Domain.DTOs;
+using Domain.Genericos;
 using Infrastructure.Interfaces;
 
 namespace Application.Services
@@ -23,6 +24,17 @@ namespace Application.Services
                 return await _repository.ExcluirDocumento(id);
             }
             catch (Exception) { throw; }
+        }
+
+        public async Task<ResultadoPaginado<DocFiscalDto>> ListarDocumentos(string? filtro, int pagina, int tamanhoPagina)
+        {
+            var documentos = await _repository.ListarDocumentos(filtro, pagina, tamanhoPagina);
+
+            return new ResultadoPaginado<DocFiscalDto>
+            {
+                Itens = _mapper.Map<List<DocFiscalDto>>(documentos.Item1),
+                ContagemTotal = documentos.Item2
+            };
         }
 
         public async Task<DocFiscalDto> ObterDocumentoPorId(int id)

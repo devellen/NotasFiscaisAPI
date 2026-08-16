@@ -13,6 +13,17 @@ namespace CrudNotasFiscais.Controllers
         {
             _service = service;
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> ExcluirDocumento(int id)
+        {
+            try
+            {
+                var res = await _service.ExcluirDocumento(id);
+                if (res) return Ok("Documento excluído com sucesso");
+                return BadRequest("Erro ao tentar excluir documento");
+            }
+            catch (Exception ex) { return BadRequest(ex.Message); }
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterDocumentoPorId(int id)
@@ -25,5 +36,6 @@ namespace CrudNotasFiscais.Controllers
             }
             catch (Exception ex) { return BadRequest(ex.Message); }
         }
+
     }
 }

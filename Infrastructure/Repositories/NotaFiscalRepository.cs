@@ -14,6 +14,17 @@ namespace Infrastructure.Repositories
             _connection = connection;
         }
 
+        public async Task<bool> ExcluirDocumento(int id)
+        {
+            try
+            {
+                var sql = $"DELETE FROM DocumentoFiscal WHERE Id = {id}";
+                var res = await _connection.ExecuteAsync(sql);
+                return res > 0 ? true : false;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
         public async Task<DocFiscal> ObterDocumentoPorId(int id)
         {
             try

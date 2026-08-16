@@ -16,6 +16,15 @@ namespace Application.Services
             _mapper = mapper;
         }
 
+        public async Task<bool> ExcluirDocumento(int id)
+        {
+            try
+            {
+                return await _repository.ExcluirDocumento(id);
+            }
+            catch (Exception) { throw; }
+        }
+
         public async Task<DocFiscalDto> ObterDocumentoPorId(int id)
         {
             try

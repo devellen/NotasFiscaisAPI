@@ -37,6 +37,27 @@
   },
   {
     "ContainingType": "CrudNotasFiscais.Controllers.NotaFiscalController",
+    "Method": "AtualizarDocumento",
+    "RelativePath": "NotaFiscal/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "doc",
+        "Type": "Domain.DTOs.DocFiscalDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CrudNotasFiscais.Controllers.NotaFiscalController",
     "Method": "ExcluirDocumento",
     "RelativePath": "NotaFiscal/{id}",
     "HttpMethod": "DELETE",

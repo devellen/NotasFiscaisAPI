@@ -14,6 +14,27 @@ namespace Infrastructure.Repositories
             _connection = connection;
         }
 
+        public async Task<bool> AtualizarDocumento(DocFiscal documento)
+        {
+            try
+            {
+                var sql = @$"UPDATE DocumentoFiscal SET
+                                TipoDocumento = @TipoDocumento,
+                                ChaveAcesso = @ChaveAcesso,
+                                Numero = @Numero,
+                                Serie = @Serie,
+                                CnpjEmitente = @CnpjEmitente,
+                                RazaoSocialEmitente = @RazaoSocialEmitente, 
+                                Uf = @Uf,
+                                ValorTotal = @ValorTotal 
+                            WHERE Id = @Id;";
+                
+                var result = await _connection.ExecuteAsync(sql, documento);
+                return result > 0 ? true : false;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
         public async Task<bool> ExcluirDocumento(int id)
         {
             try

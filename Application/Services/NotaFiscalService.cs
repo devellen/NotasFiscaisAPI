@@ -2,6 +2,7 @@
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Genericos;
+using Domain.Models;
 using Infrastructure.Interfaces;
 
 namespace Application.Services
@@ -15,6 +16,17 @@ namespace Application.Services
         {
             _repository = repository;
             _mapper = mapper;
+        }
+
+        public async Task<bool> AtualizarDocumento(int id, DocFiscalDto documento)
+        {
+            try
+            {
+                var doc = _mapper.Map<DocFiscal>(documento);
+                doc.Id = id;
+                return await _repository.AtualizarDocumento(doc);
+            }
+            catch (Exception) { throw; }
         }
 
         public async Task<bool> ExcluirDocumento(int id)

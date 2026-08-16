@@ -15,6 +15,19 @@ namespace CrudNotasFiscais.Controllers
         {
             _service = service;
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AtualizarDocumento(int id, [FromBody] DocFiscalDto doc)
+        {
+            try
+            {
+                var res = await _service.AtualizarDocumento(id, doc);
+                if (res) return Ok("Documento atualizado com sucesso");
+                return BadRequest("Erro ao tentar atualizar documento");
+            }
+            catch (Exception ex) { return BadRequest(ex.Message); }
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> ExcluirDocumento(int id)
         {

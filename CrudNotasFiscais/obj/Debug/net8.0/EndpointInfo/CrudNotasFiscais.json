@@ -5,6 +5,92 @@
     "version": "1.0"
   },
   "paths": {
+    "/NotaFiscal": {
+      "post": {
+        "tags": [
+          "NotaFiscal"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "arquivo": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "arquivo": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NotaFiscal"
+        ],
+        "parameters": [
+          {
+            "name": "filtro",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamanhoPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocFiscalDtoResultadoPaginado"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocFiscalDtoResultadoPaginado"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocFiscalDtoResultadoPaginado"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/NotaFiscal/{id}": {
       "put": {
         "tags": [
@@ -85,62 +171,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/NotaFiscal": {
-      "get": {
-        "tags": [
-          "NotaFiscal"
-        ],
-        "parameters": [
-          {
-            "name": "filtro",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pagina",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "tamanhoPagina",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 50
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/DocFiscalDtoResultadoPaginado"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DocFiscalDtoResultadoPaginado"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DocFiscalDtoResultadoPaginado"
-                }
-              }
-            }
           }
         }
       }

@@ -5,6 +5,7 @@ namespace Application.Interfaces
 {
     public interface INotaFiscalService
     {
+        Task<DocFiscalDto> ProcessarXml(string arquivo);
         Task<bool> AtualizarDocumento(int id, DocFiscalDto documento);
         Task<DocFiscalDto> ObterDocumentoPorId(int id);
         Task<ResultadoPaginado<DocFiscalDto>> ListarDocumentos(string? filtro, int pagina, int tamanhoPagina);

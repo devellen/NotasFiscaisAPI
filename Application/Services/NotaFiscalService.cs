@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using System.Xml.Linq;
+using Application.Interfaces;
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Genericos;
@@ -11,11 +12,13 @@ namespace Application.Services
     {
         private readonly INotaFiscalRepository _repository;
         private readonly IMapper _mapper;
+        private readonly NFeParser _nfeParser;
 
-        public NotaFiscalService(INotaFiscalRepository repository, IMapper mapper)
+        public NotaFiscalService(INotaFiscalRepository repository, IMapper mapper, NFeParser nfeParser)
         {
             _repository = repository;
             _mapper = mapper;
+            _nfeParser = nfeParser;
         }
 
         public async Task<bool> AtualizarDocumento(int id, DocFiscalDto documento)
@@ -57,6 +60,25 @@ namespace Application.Services
                 return _mapper.Map<DocFiscalDto>(doc);
             }
             catch (Exception) { throw; }
+        }
+
+        public async Task<DocFiscalDto> ProcessarXml(string xml)
+        {
+            if (string.IsNullOrWhiteSpace(xml))
+                throw new ArgumentException("O XML não pode estar vazio.");
+
+            var documento = _nfeParser.Parse(xml);
+
+            var xmlDocument = XDocument.Parse(xml);
+
+            documento.XmlOriginal = xmlDocument.ToString(
+                SaveOptions.DisableFormatting);
+
+            var id = await _repository.InserirDocumento(documento);
+
+            documento.Id = id;
+
+            return _mapper.Map<DocFiscalDto>(documento);
         }
     }
 }

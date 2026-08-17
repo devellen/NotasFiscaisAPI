@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CrudNotasFiscais")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+606ea3a0369437daec26a4a699f3ded9225f8be7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2dfc05815928e6818e6471e17637403b8fc46584")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrudNotasFiscais")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrudNotasFiscais")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

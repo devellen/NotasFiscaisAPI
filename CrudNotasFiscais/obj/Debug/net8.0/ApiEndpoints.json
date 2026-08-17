@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "CrudNotasFiscais.Controllers.NotaFiscalController",
+    "Method": "Upload",
+    "RelativePath": "NotaFiscal",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "arquivo",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CrudNotasFiscais.Controllers.NotaFiscalController",
     "Method": "ObterTodos",
     "RelativePath": "NotaFiscal",
     "HttpMethod": "GET",

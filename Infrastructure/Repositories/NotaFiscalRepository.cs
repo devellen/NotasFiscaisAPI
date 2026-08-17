@@ -46,6 +46,47 @@ namespace Infrastructure.Repositories
             catch (Exception ex) { throw ex; }
         }
 
+        public async Task<int> InserirDocumento(DocFiscal documento)
+        {
+            try
+            {
+                var sql = @$"INSERT INTO DocumentoFiscal
+                            (
+                                TipoDocumento,
+                                ChaveAcesso,
+                                Numero,
+                                Serie,
+                                DataEmissao,
+                                CnpjEmitente,
+                                RazaoSocialEmitente,
+                                CnpjDestinatario,
+                                RazaoSocialDestinatario,
+                                Uf,
+                                ValorTotal,
+                                XmlOriginal
+                            )
+                            VALUES
+                            (
+                                @TipoDocumento,
+                                @ChaveAcesso,
+                                @Numero,
+                                @Serie,
+                                @DataEmissao,
+                                @CnpjEmitente,
+                                @RazaoSocialEmitente,
+                                @CnpjDestinatario,
+                                @RazaoSocialDestinatario,
+                                @Uf,
+                                @ValorTotal,
+                                @XmlOriginal
+                            )";
+
+                return await _connection.ExecuteScalarAsync<int>(sql, documento);
+                
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
         public async Task<(IEnumerable<DocFiscal>, int)> ListarDocumentos(string? filtro, int pagina, int tamanhoPagina)
         {
             int totalCount;

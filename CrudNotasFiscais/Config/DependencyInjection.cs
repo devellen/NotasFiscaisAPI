@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Services;
+using Domain.Genericos;
 using Infrastructure.Interfaces;
 using Infrastructure.Repositories;
 
@@ -11,6 +12,7 @@ namespace CrudNotasFiscais.Config
         {
             services.AddScoped <INotaFiscalRepository, NotaFiscalRepository>();
             services.AddScoped <INotaFiscalService, NotaFiscalService>();
+            services.AddScoped<NFeParser>();
 
             return services;
         }

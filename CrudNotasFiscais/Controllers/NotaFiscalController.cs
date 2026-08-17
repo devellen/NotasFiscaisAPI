@@ -15,6 +15,21 @@ namespace CrudNotasFiscais.Controllers
         {
             _service = service;
         }
+        [HttpPost]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Upload(IFormFile arquivo)
+        {
+            if (arquivo == null || arquivo.Length == 0)
+                return BadRequest("Arquivo não informado.");
+
+            using var reader = new StreamReader(arquivo.OpenReadStream());
+
+            var xml = await reader.ReadToEndAsync();
+
+            var documento = await _service.ProcessarXml(xml);
+
+            return Ok(documento);
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> AtualizarDocumento(int id, [FromBody] DocFiscalDto doc)
